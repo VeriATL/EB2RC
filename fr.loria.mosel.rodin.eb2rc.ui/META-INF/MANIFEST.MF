@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: code generator ui
+Bundle-SymbolicName: fr.loria.mosel.rodin.eb2rc.ui;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: fr.loria.mosel.rodin.eb2rc.ui.activators.PreferenceUIActivator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.debug.ui;bundle-version="3.12.50"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Automatic-Module-Name: fr.loria.mosel.eventb.codegenerator.config.ui
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: LORIA
