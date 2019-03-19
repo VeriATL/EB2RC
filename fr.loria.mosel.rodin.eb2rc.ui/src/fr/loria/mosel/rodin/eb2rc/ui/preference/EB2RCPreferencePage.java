@@ -30,10 +30,11 @@ public class EB2RCPreferencePage extends FieldEditorPreferencePage implements IW
 	
 	@Override
 	protected void createFieldEditors() {
-		addField(new StringFieldEditor("cv", "Name of Control Variable", getFieldEditorParent()));
-		addField(new StringFieldEditor("init", "Name of Init Event", getFieldEditorParent()));
-		addField(new StringFieldEditor("symbol", "Symbol for Splitting Event Name", getFieldEditorParent()));	
-		addField(new StringFieldEditor("sig", "Signature of Generated Algorithm", getFieldEditorParent()));
+		addField(new StringFieldEditor(EB2RCConstants.CV, "Name of Control Variable", getFieldEditorParent()));
+		addField(new StringFieldEditor(EB2RCConstants.SIG, "Signature of Generated Algorithm", getFieldEditorParent()));
+		addField(new StringFieldEditor(EB2RCConstants.START, "Name of Init Event", getFieldEditorParent()));
+		addField(new StringFieldEditor(EB2RCConstants.SYMBOL, "Symbol for Splitting Event Name", getFieldEditorParent()));	
+		
 	}
 
 }
