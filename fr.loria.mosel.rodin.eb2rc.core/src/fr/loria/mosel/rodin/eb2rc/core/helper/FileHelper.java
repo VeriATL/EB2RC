@@ -135,8 +135,8 @@ public class FileHelper {
 				PowerSetType.class,
 				ProductType.class,
 				ProductType.class,
-				bEventObject.class,
-				bMachineObject.class);
+				bEvent.class,
+				bMachine.class);
 	}
 	
 
@@ -171,7 +171,7 @@ public class FileHelper {
 			
 	}
 	
-	public static String genXMItoFile(bMachineObject pu, String name, String filePath) 
+	public static String genXMItoFile(bMachine pu, String name, String filePath) 
 			throws JAXBException, IOException{		
 		StringWriter sw = new StringWriter();
 		JAXBContext context = getEventBContext();

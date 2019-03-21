@@ -37,9 +37,9 @@ import org.rodinp.core.RodinDBException;
 public class IMachineRootHelper {
 
 	// find event by label name
-	public static ArrayList<bEventObject> findNextEvents(ArrayList<bEventObject> eos, String nextEvtName) {
-		ArrayList<bEventObject> rtn = new ArrayList<bEventObject>();
-		for(bEventObject e: eos)
+	public static ArrayList<bEvent> findNextEvents(ArrayList<bEvent> eos, String nextEvtName) {
+		ArrayList<bEvent> rtn = new ArrayList<bEvent>();
+		for(bEvent e: eos)
 		{
 			if(e.getCvi().equals(nextEvtName)){
 				rtn.add(e);
