@@ -33,32 +33,4 @@ public class IRodinParsingHelper {
 		return varList.toArray(new bParameter[varList.size()]);
 	}
 
-
-
-
-	public static Predicate typeCheckedParsing(String s, FormulaFactory ff, ITypeEnvironment env) throws Exception{
-		IParseResult result;
-		result = ff.parsePredicate(s, LanguageVersion.LATEST, null);
-		
-		Predicate pred = result.getParsedPredicate();
-		pred.typeCheck(env);
-		pred.getSyntaxTree();	//only for instantiate quantifier, i.e., rewrite the boundIdentifier to boundIdDecl
-		
-		return pred;
-		
-		
-	}
-	
-	public static Assignment typeCheckedParsingAssignment(String s, FormulaFactory ff, ITypeEnvironment env) throws Exception{
-		IParseResult result;
-		result = ff.parseAssignment(s,LanguageVersion.LATEST, null);
-		
-		Assignment pred = result.getParsedAssignment();
-		pred.typeCheck(env);
-		pred.getSyntaxTree();	//only for instantiate quantifier, i.e., rewrite the boundIdentifier to boundIdDecl
-		
-		return pred;
-		
-		
-	}
 }

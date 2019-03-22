@@ -161,19 +161,18 @@ public class bRodinProject  {
 	
 	/* 
 	 * Control Flow Analysis on the Rodin Project based on control variables from preference page
+	 * @return leading bEvent whose control variable is the start
 	 */
-	public void controlFlowAnalysis() throws CoreException {
+	public bEvent controlFlowAnalysis() throws CoreException {
 		IMachineRoot iRefinedMachine = lastRefinedMachine();
 		
 		bMachine ibMachine= new bMachine(this, iRefinedMachine);
 		List<bEvent> bEvts = ibMachine.preAnalyze();
 		bEvent init = ibMachine.findInitEvent(bEvts);
 		
-		ibMachine.analyze(init, bEvts);
+		ibMachine.analyze(init, bEvts);	
 		
-		
-		
-		
+		return init;
 	}
 	
 	

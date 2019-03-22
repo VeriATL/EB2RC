@@ -2,9 +2,6 @@ package fr.loria.mosel.rodin.eb2rc.ui.popup.menu;
 
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
-import org.eventb.core.ast.FormulaFactory;
-import org.rodinp.core.IRodinDB;
-import org.rodinp.core.RodinCore;
 
 import fr.loria.mosel.rodin.eb2rc.ui.preference.EB2RCConstants;
 
