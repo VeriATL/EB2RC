@@ -150,6 +150,10 @@ public class bEvent {
 	
 	/*
 	 * Analyze event name for its nature, isVisible, guard
+	 * 
+	 * @Warning Event's name, in the case of REC call, follows:
+	 * 				rec@name@condition@visibility
+	 *          where @ is the split symbol defined in the preference page
 	 * */
 	private void analyzeName (String evtName) {
 		this.name = evtName;
