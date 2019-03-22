@@ -1,6 +1,7 @@
 package fr.loria.mosel.rodin.eb2rc.core.datastructure;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
@@ -165,9 +166,13 @@ public class bRodinProject  {
 		IMachineRoot iRefinedMachine = lastRefinedMachine();
 		
 		bMachine ibMachine= new bMachine(this, iRefinedMachine);
-		IEvent initEvent = ibMachine.findInitEvent();
+		List<bEvent> bEvts = ibMachine.preAnalyze();
+		bEvent init = ibMachine.findInitEvent(bEvts);
 		
-		ibMachine.analyze(initEvent);
+		ibMachine.analyze(init, bEvts);
+		
+		
+		
 		
 	}
 	
