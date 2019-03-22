@@ -166,7 +166,7 @@ public class bEvent {
 			this.nature = bEventNature.REC;
 			String[] splits = evtName.split(this.machine.rodin().pref().symbol());
 			
-			if(splits.length > 3 && splits[3].startsWith(CoreConstants.TRUE)) {
+			if(splits.length > 3) {
 				this.isVisible = false;
 			}else {
 				this.isVisible = true;
