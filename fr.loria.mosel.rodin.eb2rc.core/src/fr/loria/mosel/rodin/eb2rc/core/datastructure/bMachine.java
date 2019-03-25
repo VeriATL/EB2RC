@@ -101,7 +101,7 @@ public class bMachine {
 		String start = rodin().pref().start();
 		
 		for (bEvent evt : bEvts) {
-			if(evt.start().equals(start)) {
+			if(evt.end().equals(start)) {
 				return evt;
 			}
 		}

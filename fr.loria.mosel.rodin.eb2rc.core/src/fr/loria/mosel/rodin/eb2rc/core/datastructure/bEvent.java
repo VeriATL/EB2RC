@@ -16,7 +16,7 @@ import org.eventb.core.ast.Predicate;
 import org.eventb.core.ast.RelationalPredicate;
 import org.rodinp.core.RodinDBException;
 
-import fr.loria.mosel.rodin.eb2rc.core.helper.CoreConstants;
+import fr.loria.mosel.rodin.eb2rc.core.util.CoreConstants;
 
 
 
@@ -92,6 +92,14 @@ public class bEvent {
 		}	
 	}
 
+	/*
+	 * Get event's call name, use this method after setCallName() method
+	 * */
+	private String callName() {
+		return this.callName;	
+	}
+
+	
 	/*
 	 * Set event's guards, use this method after analyzeName() method
 	 * */

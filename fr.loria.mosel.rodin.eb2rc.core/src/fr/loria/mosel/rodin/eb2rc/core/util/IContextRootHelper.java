@@ -1,4 +1,4 @@
-package fr.loria.mosel.rodin.eb2rc.core.helper;
+package fr.loria.mosel.rodin.eb2rc.core.util;
 
 import ie.nuim.cs.eventb.ASTextension.bAxiom;
 

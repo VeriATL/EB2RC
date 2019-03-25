@@ -1,4 +1,4 @@
-package fr.loria.mosel.rodin.eb2rc.core.helper;
+package fr.loria.mosel.rodin.eb2rc.core.util;
 
 public class StringHelper {
 	// translate Event name to an action, the action is a method call
