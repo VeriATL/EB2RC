@@ -3,6 +3,7 @@ package fr.loria.mosel.rodin.eb2rc.core.datastructure;
 import org.eclipse.core.runtime.CoreException;
 import org.eventb.core.ast.Assignment;
 import org.eventb.core.ast.BecomesEqualTo;
+import org.eventb.core.ast.Formula;
 import org.eventb.core.ast.IParseResult;
 import org.eventb.core.ast.ITypeEnvironment;
 import org.eventb.core.ast.Predicate;
@@ -39,7 +40,7 @@ public class bExpression{
 		Assignment assign = parseAssignment();
 		String cv = event.machine().rodin().pref().cv();
 		
-		if (assign.getTag() == 6) {
+		if (assign.getTag() == Formula.BECOMES_EQUAL_TO) {
 			BecomesEqualTo bet = (BecomesEqualTo) assign;
 
 			for (int i = 0; i < bet.getAssignedIdentifiers().length; i++) {
@@ -59,7 +60,7 @@ public class bExpression{
 		String cv = event.machine().rodin().pref().cv();
 		String start = event.machine().rodin().pref().start();
 		
-		if (assign.getTag() == 6) {
+		if (assign.getTag() == Formula.BECOMES_EQUAL_TO) {
 			BecomesEqualTo bet = (BecomesEqualTo) assign;
 
 			for (int i = 0; i < bet.getAssignedIdentifiers().length; i++) {
@@ -94,7 +95,7 @@ public class bExpression{
 		Predicate pred = parsePredicate();
 		String cv = event.machine().rodin().pref().cv();
 		
-		if (pred.getTag() == 101) {
+		if (pred.getTag() == Formula.EQUAL) {
 			RelationalPredicate relPred = (RelationalPredicate) pred;
 			if (relPred.getLeft().toString().equals(cv)) {
 				return true;

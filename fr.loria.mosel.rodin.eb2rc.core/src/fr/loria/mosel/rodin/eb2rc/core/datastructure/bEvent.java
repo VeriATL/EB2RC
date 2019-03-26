@@ -82,6 +82,8 @@ public class bEvent {
 	
 	/*
 	 * Set event's call name, use this method after analyzeName() method
+	 * 
+	 * TODO Split call name even further, e.g. call(args ; return) -> return := call(args)
 	 * */
 	private void setCallName() {
 		if(this.isVisible) {
@@ -230,7 +232,7 @@ public class bEvent {
 			Assignment assign = bAction.parseAssignment();
 			String cv = this.machine().rodin().pref().cv();
 			
-			if (assign.getTag() == 6) {
+			if (assign.getTag() == Formula.BECOMES_EQUAL_TO) {
 				BecomesEqualTo bet = (BecomesEqualTo) assign;
 
 				for (int i = 0; i < bet.getAssignedIdentifiers().length; i++) {
@@ -251,7 +253,7 @@ public class bEvent {
 			Predicate pred = bGuard.parsePredicate();
 			String cv = this.machine().rodin().pref().cv();
 			
-			if (pred.getTag() == 101) {
+			if (pred.getTag() == Formula.EQUAL) {
 				RelationalPredicate relPred = (RelationalPredicate) pred;
 				if (relPred.getLeft().toString().equals(cv)) {
 					start = relPred.getRight().toString();
