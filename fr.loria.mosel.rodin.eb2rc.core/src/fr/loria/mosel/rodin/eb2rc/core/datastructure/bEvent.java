@@ -112,7 +112,9 @@ public class bEvent {
 			if(this.nature == bEventNature.REC) {
 				String[] splits = this.name.split(this.machine.rodin().pref().symbol());
 				String guard = splits[2];
-				this.guards.add(guard);
+				if(!guard.equals("NULL")) {
+					this.guards.add(guard);
+				}
 			}else {
 				for(IGuard guard: this.event.getGuards()) {
 					if(!isControlGuard(guard)) {
