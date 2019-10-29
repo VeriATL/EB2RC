@@ -109,7 +109,7 @@ public class bEvent {
 		//TODO synthesis from refined events
 		
 		if(this.isVisible) {
-			if(this.nature == bEventNature.REC) {
+			if(this.nature == bEventNature.CALL || this.nature == bEventNature.REC) {
 				String[] splits = this.name.split(this.machine.rodin().pref().symbol());
 				String guard = splits[2];
 				if(!guard.equals("NULL")) {
