@@ -105,7 +105,7 @@ public class bEvent {
 	/*
 	 * Set event's guards, use this method after analyzeName() method
 	 * */
-	private void setGuards() throws RodinDBException {
+	private void setGuards() throws CoreException {
 		//TODO synthesis from refined events
 		
 		if(this.isVisible) {
@@ -115,10 +115,31 @@ public class bEvent {
 				this.guards.add(guard);
 			}else {
 				for(IGuard guard: this.event.getGuards()) {
-					this.guards.add(guard.getPredicateString());
+					if(!isControlGuard(guard)) {
+						this.guards.add(guard.getPredicateString());
+					}			
 				}
 			}
 		}	
+	}
+	
+	/*
+	 * Determine if an guard contains control variable or not
+	 * */
+	private boolean isControlGuard(IGuard guard) throws CoreException {
+		bExpression bGuard = new bExpression(this, guard.getPredicateString());		
+		Predicate pred = bGuard.parsePredicate();
+		String cv = this.machine().rodin().pref().cv();
+		
+		if (pred.getTag() == Formula.EQUAL) {
+			RelationalPredicate relPred = (RelationalPredicate) pred;
+			if (relPred.getLeft().toString().equals(cv)) {
+				return true;
+			} else if (relPred.getRight().toString().equals(cv)) {
+				return true;
+			}
+		}	
+		return false;
 	}
 	
 	/*
@@ -143,12 +164,10 @@ public class bEvent {
 				act = smartRearrange(act);
 				this.actions.add(act);
 			}else {
-				for(IAction act: this.event.getActions()) {
-				
+				for(IAction act: this.event.getActions()) {				
 					if(!isControlAction(act)) {
 						this.actions.add(act.getAssignmentString());
-					}
-					
+					}				
 				}
 			}
 		}
