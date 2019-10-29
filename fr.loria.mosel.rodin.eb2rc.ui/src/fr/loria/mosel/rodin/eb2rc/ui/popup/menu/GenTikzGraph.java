@@ -11,9 +11,9 @@ import org.eclipse.ui.IWorkbenchPart;
 
 import fr.loria.mosel.rodin.eb2rc.core.datastructure.bEvent;
 import fr.loria.mosel.rodin.eb2rc.core.datastructure.bRodinProject;
-import fr.loria.mosel.rodin.eb2rc.core.printer.LatexPrinter;
+import fr.loria.mosel.rodin.eb2rc.core.printer.TikzPrinter;
 
-public class GenLatex extends GenericAction implements IObjectActionDelegate{
+public class GenTikzGraph extends GenericAction implements IObjectActionDelegate{
 
 	private Shell shell;
 	private IProject selectedProject;
@@ -30,10 +30,10 @@ public class GenLatex extends GenericAction implements IObjectActionDelegate{
 				bEvent init = rodin.controlFlowAnalysis();
 				
 				if(init != null) {
-					LatexPrinter latex = new LatexPrinter(init);
-					latex.toLatex(selectedProject.getLocation());
+					TikzPrinter tikz = new TikzPrinter(init);
+					tikz.toTikz(selectedProject.getLocation());
 					
-					String msg = String.format("Tex Gen Finished. \n\n Code gen at %s/code/",
+					String msg = String.format("Tikz Gen Finished. \n\n Code gen at %s/code/",
 		                    selectedProject.getLocation().toPortableString());
 			
 					MessageDialog.openInformation(shell, "Info", msg);

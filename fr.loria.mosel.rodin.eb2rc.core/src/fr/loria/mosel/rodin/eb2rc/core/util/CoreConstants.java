@@ -8,5 +8,6 @@ public class CoreConstants {
 	
 	public static final String FOLDER = "code";
 	public static final String LATEX = "latex";
+	public static final String TIKZ = "tikz";
 	public static final String LATEXEXT = "tex";
 }
