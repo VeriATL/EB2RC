@@ -42,10 +42,11 @@ public class LatexPrinter {
 		List<bEvent> l = new ArrayList<bEvent>();
 		l.add(this.init);
 		
+		String body = bodies(0, l);	
 		s += header();		
-		s += bodies(0, l);		
+		s += tidy(body);
 		s += footer();
-		s = tidy(s);
+
 		
 		IPath dir = proj.addTrailingSeparator()
 				             .append(CoreConstants.FOLDER).addTrailingSeparator();
@@ -58,15 +59,27 @@ public class LatexPrinter {
 	/*
 	 * Print header of latex
 	 * */
-	private String header(){
-		return catn("\\begin{algorithm}", "");
+	private String header(){		
+		String s = "";
+		s = catn(s, "\\documentclass{article}");
+		s = catn(s, "\\usepackage{algorithmic}");
+		s = catn(s, "\\usepackage{amssymb}");
+		
+		s = catn(s, "\\begin{document}");
+		s = catn(s, "\\begin{algorithmic}");
+		
+		return s;
 	}
 
 	/*
 	 * Print footer of latex
 	 * */
-	private String footer(){
-		return catn("", "\\end{algorithm}");
+	private String footer(){		
+		String s = "\n";
+		s = catn(s, "\\end{algorithmic}");
+		s = catn(s, "\\end{document}");
+				
+		return s;
 	}
 	
 	/*
@@ -115,9 +128,9 @@ public class LatexPrinter {
 				s = cat(s, lv(tLevel));
 				
 				if(evts.indexOf(evt) == 0) {
-					s = cat(s, "\\If{$");
+					s = cat(s, "\\IF{$");
 				}else {
-					s = cat(s, "\\ElseIf{$");
+					s = cat(s, "\\ELSIF{$");
 				}
 				
 				s = cat(s, join(evt.guards(), " \\land "));
@@ -138,9 +151,14 @@ public class LatexPrinter {
 			
 			s = cat(s, bodies(tLevel, evt.nexts()));
 			
-			if(evt.guards().size() > 0) {
+			if(evt.guards().size() > 0) {			
 				s = cat(s, lv(level));
 				s = catn (s, "}");
+						
+				if(evts.indexOf(evt) == evts.size()-1) {
+					s = cat(s, lv(level));
+					s = catn(s, "\\ENDIF");
+				}
 			}
 		}
 			
@@ -156,9 +174,9 @@ public class LatexPrinter {
 	private String tidy(String input) {
 		input = input.trim();
 		
-		input = input.replace("\u2115", " \\nat ");
-		input = input.replace("\u2124", " \\intg ");
-		input = input.replace("\u2119", " \\pow ");
+		input = input.replace("\u2115", " \\mathbb{N} ");
+		input = input.replace("\u2124", " \\mathbb{Z} ");
+		input = input.replace("\u2119", " \\mathbb{P} ");
 	
 		// FOL
 		input = input.replace("\u0028", "(");

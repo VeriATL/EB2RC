@@ -133,22 +133,62 @@ public class bEvent {
 	/*
 	 * Set event's actions, use this method after analyzeName() method
 	 * */
-	private void setActions() throws RodinDBException {
+	private void setActions() throws CoreException {
 		//TODO synthesis from refined events
 		
 		if(this.isVisible) {
 			if(this.nature == bEventNature.CALL || this.nature == bEventNature.REC) {
 				String[] splits = this.name.split(this.machine.rodin().pref().symbol());
 				String act = splits[1];
+				act = smartRearrange(act);
 				this.actions.add(act);
 			}else {
 				for(IAction act: this.event.getActions()) {
-					this.actions.add(act.getAssignmentString());
+				
+					if(!isControlAction(act)) {
+						this.actions.add(act.getAssignmentString());
+					}
+					
 				}
 			}
 		}
 	}
 	
+	/*
+	 * Determine if an action's lhs is control variable or not
+	 * */
+	private boolean isControlAction(IAction act) throws CoreException {
+		bExpression bAction = new bExpression(this, act.getAssignmentString());		
+		Assignment assign = bAction.parseAssignment();
+		String cv = this.machine().rodin().pref().cv();
+		
+		if (assign.getTag() == Formula.BECOMES_EQUAL_TO) {
+			BecomesEqualTo bet = (BecomesEqualTo) assign;
+
+			for (int i = 0; i < bet.getAssignedIdentifiers().length; i++) {
+				if (bet.getAssignedIdentifiers()[i].toString().equals(cv)) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+
+	/*
+	 * Rearrange special act string, e.g. p(a;b) -> b := p(a)
+	 * */
+	private String smartRearrange(String act) {
+		if(act.contains(";")) {
+			String[] splits = act.split(";");
+			String a = splits[0].concat(")");
+			String r = splits[1].replace(")", "");
+			return String.format("%s := %s ", r, a);
+		}else {
+			return act;
+		}
+	}
+
 	/*
 	 * Return event's actions
 	 * 

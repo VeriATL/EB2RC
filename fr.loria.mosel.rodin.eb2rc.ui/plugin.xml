@@ -20,13 +20,6 @@
                id="fr.loria.mosel.rodin.eb2rc.ui.popup.menu.callgraph">
          </action>  
          <action
-               label="Generate Recursive Algorithm"
-               class="fr.loria.mosel.rodin.eb2rc.ui.popup.menu.GenAlgorithm"
-               menubarPath="fr.loria.mosel.rodin.eb2rc.ui.popup.menu/top"
-               enablesFor="1"
-               id="fr.loria.mosel.rodin.eb2rc.ui.popup.menu.algorithm">
-         </action>
-         <action
                label="Recursive Algorithm Tex generation"
                class="fr.loria.mosel.rodin.eb2rc.ui.popup.menu.GenLatex"
                menubarPath="fr.loria.mosel.rodin.eb2rc.ui.popup.menu/top"

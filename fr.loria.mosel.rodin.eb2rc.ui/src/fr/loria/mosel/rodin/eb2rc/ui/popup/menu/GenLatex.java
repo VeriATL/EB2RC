@@ -31,9 +31,12 @@ public class GenLatex extends GenericAction implements IObjectActionDelegate{
 				
 				if(init != null) {
 					LatexPrinter latex = new LatexPrinter(init);
-					String c = latex.toLatex(selectedProject.getLocation());
+					latex.toLatex(selectedProject.getLocation());
 					
-					MessageDialog.openInformation(shell, "Info", "DONE");
+					String msg = String.format("Finished. \n\n Code gen at %s/code/",
+		                    selectedProject.getLocation().toPortableString());
+			
+					MessageDialog.openInformation(shell, "Info", msg);
 				}else {
 					MessageDialog.openInformation(shell, "Info", "Control Flow Analysis Failed. Please Check Machine.");
 				}
