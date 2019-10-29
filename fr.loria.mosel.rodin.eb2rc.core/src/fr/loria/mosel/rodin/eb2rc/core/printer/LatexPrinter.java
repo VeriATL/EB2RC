@@ -63,10 +63,13 @@ public class LatexPrinter {
 		String s = "";
 		s = catn(s, "\\documentclass{article}");
 		s = catn(s, "\\usepackage{algorithmic}");
-		s = catn(s, "\\usepackage{amssymb}");
-		
+		s = catn(s, "\\usepackage{algorithm}");
+		s = catn(s, "\\usepackage{amssymb}");	
 		s = catn(s, "\\begin{document}");
-		s = catn(s, "\\begin{algorithmic}");
+		s = catn(s, "\\begin{algorithm}");
+		s = catn(s, String.format("\\caption{Algorithm: %s}", init.machine().rodin().pref().sig()));
+		s = catn(s, "\\label{alg}");
+		s = catn(s, "\\begin{algorithmic}[1]");	// [1] for generate line number
 		
 		return s;
 	}
@@ -77,6 +80,7 @@ public class LatexPrinter {
 	private String footer(){		
 		String s = "\n";
 		s = catn(s, "\\end{algorithmic}");
+		s = catn(s, "\\end{algorithm}");
 		s = catn(s, "\\end{document}");
 				
 		return s;
