@@ -1,7 +1,8 @@
 Code Generation for Recursive Programs developed in Rodin
 =======
 
-# Instructions
+Instructions
+------
 
 ### Dependencies
 * Rodin 3.4
