@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="fr.loria.mosel.rodin.eb2rc.feature"
-      label="Feature"
-      version="1.0.0.qualifier"
-      provider-name="LORIA">
+      label="EB2RC"
+      version="1.0.0.0"
+      provider-name="MOSEL-LORIA">
 
    <description>
       Code Generation Plugin for Recursive Program developed in Rodin
