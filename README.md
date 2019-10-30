@@ -1,1 +1,22 @@
-# EB2RC
+Code Generation for Recursive Programs developed in Rodin
+=======
+
+# Install Instructions
+
+### Dependencies
+* Rodin 3.4
+
+### Procedure
+1. Download latest update site of VeriATL from [Github Release](https://github.com/veriatl/EB2RC/releases/).
+2. In Eclipse, goto Help -> Install New Software -> Add -> Archive -> Choosing the download archive -> Select EB2RC from Category -> Finish.
+
+
+Contacts
+------
+> Zheng Cheng: zheng.cheng@inria.fr
+
+> Dominique Méry: dominique.mery@loria.fr
+
+Collaborators
+------
+* Rosemary Monahan, Maynooth Univerisity, IE
