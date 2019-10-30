@@ -204,7 +204,7 @@ public class bEvent {
 			String[] splits = act.split(";");
 			String a = splits[0].concat(")");
 			String r = splits[1].replace(")", "");
-			return String.format("%s := %s ", r, a);
+			return String.format("%s≔%s ", r, a);
 		}else {
 			return act;
 		}

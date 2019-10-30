@@ -10,4 +10,6 @@ public class CoreConstants {
 	public static final String LATEX = "latex";
 	public static final String TIKZ = "tikz";
 	public static final String LATEXEXT = "tex";
+	
+	public static final String GLABEL = "c";
 }

@@ -2,6 +2,7 @@ package fr.loria.mosel.rodin.eb2rc.core.printer;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,16 @@ public class TikzPrinter {
 	 * */
 	private bEvent init;
 	
+	/*
+	 * willbePrintedDecisions used in printing
+	 * */
+	private List<Integer> willbePrintedDecisions;
+
+	/*
+	 * Guards used in printing
+	 * */
+	private List<String> guardlist;
+	
 	public TikzPrinter(bEvent evt) {
 		charset = SystemUtil.charset();
 		init = evt;
@@ -37,7 +48,17 @@ public class TikzPrinter {
 		return charset;
 	}
 	
+	
+	private void SetUp() {
+		willbePrintedDecisions = new ArrayList<Integer>();
+		guardlist = new ArrayList<String>();
+	}
+	
+	
 	public String toTikz(IPath proj) throws IOException {
+		
+		SetUp();
+		
 		String s = "";
 		List<bEvent> l = new ArrayList<bEvent>();
 		l.add(this.init);
@@ -85,12 +106,24 @@ public class TikzPrinter {
 	private String footer(){		
 		String s = "\n";
 		s = catn(s, "\\end{tikzpicture}");
+		s = catn(s, "\\newpage");
+		s = catn(s, conditions());
 		s = catn(s, "\\end{document}");
 				
 		return s;
 	}
 	
 	
+	private String conditions() {
+		String s = "";
+		s = catn(s, "\\begin{itemize}");
+		for(int i=0; i<guardlist.size(); i++) {
+			s = catn(s, String.format("\\item[\\textbf{%s}] $%s$", CoreConstants.GLABEL+(i+1), tidy(guardlist.get(i))));
+		}
+		s = catn(s, "\\end{itemize}");
+		return s;
+	}
+
 	/*
 	 * Concat two strings
 	 * */
@@ -119,10 +152,12 @@ public class TikzPrinter {
 		String s = "";	
 		bEvent bro = null;
 		
+		List<bEvent> remainder = new ArrayList<bEvent>(evts);
+		
 		for(bEvent evt : evts) {
 			
 			int id = evt.hashCode();
-					
+			remainder.remove(evt);
 					
 			// print a block
 			String acts = join(evt.actions(), " \\land ");
@@ -134,22 +169,41 @@ public class TikzPrinter {
 					acts = String.format("\\node [block, right of=%s] (%s) { $ %s $};", idbro, id, acts);
 				}else{
 					acts = String.format("\\node [block, below of=%s] (%s) { $ %s $};", evt.start(), id, acts);
-				}
-				
+				}			
 			}
 		    s = catn(s, acts);
 			
-			// print decision after
-			String dec = String.format("\\node [decision, below of=%s] (%s) {$%s$};", id, evt.end(), evt.end());
-			s = catn(s, dec);
-			
+			// store decision after
+		    if(!isWillbePrintedDecisions(remainder, evt.end())) {
+		    	String str = String.format("\\node [decision, below of=%s] (%s) {$%s$};", id, evt.end(), evt.end());
+				s = catn(s, str);
+		    }else {
+		    	willbePrintedDecisions.add(id);
+		    }
+		    
+		    // recursively print sub evts
 			s = cat(s, bodiesNodes(evt.nexts()));
+						
 			bro = evt;
 		}
-			
+		
+
+				
 		return s;
 	}
 	
+	/*
+	 * Decide if any descendants of evt has decision named s
+	 * */
+	private boolean isWillbePrintedDecisions(List<bEvent> evts, String s) {
+	    for(bEvent evt : evts) {
+			if (evt.end().equals(s) || isWillbePrintedDecisions(evt.nexts(), s)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
 	
 	
 	/*
@@ -167,15 +221,25 @@ public class TikzPrinter {
 			if(!evt.start().equals("")) {
 				if(evt.guards().size() > 0) {	
 					guards = join(evt.guards(), " \\land ");
-					guards = String.format("\\path [line] (%s) -- node [near end] {$%s$} (%s);", evt.start(), guards, id);
+					guardlist.add(guards);
+					String rep = CoreConstants.GLABEL + guardlist.size() ;
+					guards = String.format("\\path [line] (%s) -- node [near end] {$%s$} (%s);", evt.start(), rep, id);
+					s = catn(s, guards);
+				}else {
+					guards = String.format("\\path [line] (%s) -- node [near end] {$ $} (%s);", evt.start(), id);
 					s = catn(s, guards);
 				}
 			}
 			
 			// line decision after with event
-			String line = String.format("\\path [line] (%s) -- (%s);", id, evt.end());
-			s = catn(s, line);
-			
+			if(willbePrintedDecisions.contains(id)) {
+				String line = String.format("\\path [line] (%s) |- (%s);", id, evt.end());
+				s = catn(s, line);
+			}else {
+				String line = String.format("\\path [line] (%s) -- (%s);", id, evt.end());
+				s = catn(s, line);
+			}
+				
 			// next events
 			s = cat(s, bodiesLines(evt.nexts()));
 		}
