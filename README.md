@@ -1,8 +1,8 @@
 Code Generation for Recursive Programs developed in Rodin
 =======
 
-Instructions
-------
+# Instructions
+
 
 ### Dependencies
 * Rodin 3.4
@@ -14,12 +14,12 @@ Instructions
 ### Usage
 * See [Wiki page](https://github.com/veriatl/EB2RC/wiki/).
 
-Contacts
-------
+# Contacts
+
 > Zheng Cheng: zheng.cheng@inria.fr
 
 > Dominique Méry: dominique.mery@loria.fr
 
-Collaborators
-------
+# Collaborators
+
 * Rosemary Monahan, Maynooth Univerisity, IE
