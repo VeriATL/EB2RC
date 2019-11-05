@@ -184,7 +184,7 @@ public class PythonPrinter {
 	 * */
 	private String tidy(String input) {	
 		input = input.replace("\u2115", " 0 ");
-		input = input.replace("\u2124", " \\mathbb{Z} ");
+		input = input.replace("\u2124", " 0 ");
 		input = input.replace("\u2119", " \\mathbb{P} ");
 	
 		// FOL
@@ -193,7 +193,7 @@ public class PythonPrinter {
 		input = input.replace("\u21D4", " \\leqv ");
 		input = input.replace("\u21D2", " \\limp ");
 		input = input.replace("\u2227", " and ");
-		input = input.replace("\u2228", " \\lor ");
+		input = input.replace("\u2228", " or ");
 		input = input.replace("\u00AC", " \\lnot ");
 		input = input.replace("\u22A4", " \\top ");
 		input = input.replace("\u22A5", " \\perp ");
@@ -230,7 +230,7 @@ public class PythonPrinter {
 		// set manipulation
 		input = input.replace("\u007B", " { ");
 		input = input.replace("\u007D", " } ");
-		input = input.replace("\u21A6", " \\mapsto ");
+		input = input.replace("\u21A6", " , ");
 		input = input.replace("\u2205", " \\emptyset ");
 		input = input.replace("\u2229", " \\cap ");
 		input = input.replace("\u222A", " \\cup ");
@@ -269,7 +269,8 @@ public class PythonPrinter {
 		input = input.replace("\u2212", " - ");
 		input = input.replace("\u2217", " * ");
 		input = input.replace("\u00F7", " // ");
-		input = input.replace("\u005E", " \\expn ");	//problematic
+		input = input.replace("mod", " % ");
+		input = input.replace("\u005E", " ^ ");	//problematic
 		return input;
 	}
 }

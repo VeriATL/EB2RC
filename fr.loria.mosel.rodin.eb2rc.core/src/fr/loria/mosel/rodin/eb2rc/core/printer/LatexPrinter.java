@@ -172,7 +172,7 @@ public class LatexPrinter {
 	/*
 	 * Replace special chars in input with latex tags
 	 * 
-	 * TODO: 1. Comply with https://bit.ly/2FseP9j (bmath.lex)
+	 * TODO: 1. Comply with https://bit.ly/2JQA7Au
 	 *       2. Unit testing needed here
 	 * */
 	private String tidy(String input) {
