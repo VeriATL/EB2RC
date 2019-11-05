@@ -12,4 +12,6 @@ public class CoreConstants {
 	public static final String LATEXEXT = "tex";
 	
 	public static final String GLABEL = "c";
+	public static final String PYTHONEXT = "py";
+	public static final String PYTHON = "api";
 }

@@ -26,6 +26,13 @@
                enablesFor="1"
                id="fr.loria.mosel.rodin.eb2rc.ui.popup.menu.latex">
          </action>
+         <action
+               label="Generate Python Executable"
+               class="fr.loria.mosel.rodin.eb2rc.ui.popup.menu.GenPython"
+               menubarPath="fr.loria.mosel.rodin.eb2rc.ui.popup.menu/top"
+               enablesFor="1"
+               id="fr.loria.mosel.rodin.eb2rc.ui.popup.menu.py">
+         </action>
       </objectContribution>
    </extension>
    <extension point="org.eclipse.ui.preferencePages">
