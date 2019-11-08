@@ -37,8 +37,12 @@ public class GenericAction {
 		return read().getString(EB2RCConstants.SYMBOL);
 	}
 
+	// read dependencies from store
+	public String deps() {
+		return read().getString(EB2RCConstants.DEP);
+	}
 	/* accessors to preference store end */
 
-	
+
 	
 }

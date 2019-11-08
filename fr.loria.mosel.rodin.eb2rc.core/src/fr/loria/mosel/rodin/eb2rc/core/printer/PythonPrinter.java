@@ -22,6 +22,16 @@ public class PythonPrinter {
 	private Map<String, String> charset;
 	
 	/*
+	 * Imported library dependencies
+	 * */
+	private List<String> imports;
+	
+	/*
+	 * External Rodin project dependencies
+	 * */
+	private List<String> externals;
+	
+	/*
 	 * Initial bEvent object to print
 	 * */
 	private bEvent init;
@@ -29,6 +39,22 @@ public class PythonPrinter {
 	public PythonPrinter(bEvent evt) {
 		charset = SystemUtil.charset();
 		init = evt;
+		imports = null;
+		externals = null;
+	}
+	
+	/*
+	 * Set Imported library dependencies
+	 * */
+	public void setImports(List<String> imports) {
+		this.imports = imports;
+	}
+	
+	/*
+	 * Set External Rodin library dependencies
+	 * */
+	public void setExternals(List<String> externals) {
+		this.externals = externals;
 	}
 	
 	/*
@@ -38,6 +64,14 @@ public class PythonPrinter {
 		return charset;
 	}
 	
+    /**
+     * ?.
+     *
+     * @param ?
+     *		   if null, skip print to file system location.
+     * @return ?
+     * @throws IOException, Exception 
+     */
 	public String toCode (IPath proj) throws IOException, Exception {
 		String sig = init.machine().rodin().pref().sig();
 		String[] parsedSig = signatureParser(sig);
@@ -56,16 +90,52 @@ public class PythonPrinter {
 		List<bEvent> l = new ArrayList<bEvent>();
 		l.add(this.init);
 		
+		// print imports
+		if(this.imports!=null) {
+			s += imports();
+		}
+		
+		// print externals
+		if(this.externals!=null) {
+			s += externals();
+		}
+		
 		String body = bodies(1, l);	
 		s += header(fun, pars);		
 		s += tidy(body);
 		s += footer(rets);
 
+		if(proj!=null) {
+			IPath dir = proj.addTrailingSeparator()
+					             .append(CoreConstants.FOLDER).addTrailingSeparator();
+			String filename = fun + "." + CoreConstants.PYTHONEXT;
+			IOUtil.write(dir, filename, s);
+		}
 		
-		IPath dir = proj.addTrailingSeparator()
-				             .append(CoreConstants.FOLDER).addTrailingSeparator();
-		String filename = fun + "." + CoreConstants.PYTHONEXT;
-		IOUtil.write(dir, filename, s);
+		return s;
+	}
+	
+	/*
+	 * Print imports of python
+	 * */
+	private String imports() {
+		String s = "";
+		for(String i : imports) {
+			s = catn(s, String.format("import %s;", i));
+		}
+		s = catn(s, "");
+		
+		return s;
+	}
+
+	/*
+	 * Print externals rodin projects of python
+	 * */
+	private String externals() {
+		String s = "";
+		for(String ext: externals) {
+			s = catn(s, ext);
+		}
 		
 		return s;
 	}

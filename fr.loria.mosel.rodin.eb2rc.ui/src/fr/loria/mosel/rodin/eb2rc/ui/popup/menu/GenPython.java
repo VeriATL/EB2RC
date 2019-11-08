@@ -1,5 +1,9 @@
 package fr.loria.mosel.rodin.eb2rc.ui.popup.menu;
 
+import java.awt.List;
+import java.util.ArrayList;
+import java.util.Map;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -11,8 +15,8 @@ import org.eclipse.ui.IWorkbenchPart;
 
 import fr.loria.mosel.rodin.eb2rc.core.datastructure.bEvent;
 import fr.loria.mosel.rodin.eb2rc.core.datastructure.bRodinProject;
-import fr.loria.mosel.rodin.eb2rc.core.printer.LatexPrinter;
 import fr.loria.mosel.rodin.eb2rc.core.printer.PythonPrinter;
+import fr.loria.mosel.rodin.eb2rc.core.util.RodinUtil;
 
 public class GenPython extends GenericAction implements IObjectActionDelegate{
 
@@ -24,6 +28,8 @@ public class GenPython extends GenericAction implements IObjectActionDelegate{
 	public void run(IAction action) {
 		bRodinProject rodin = new bRodinProject(selectedProject, cv(), sig(), start(), symbol());
 		
+		String deps = deps();
+		
 		if(rodin.project() == null) {
 			MessageDialog.openInformation(shell, "Info", "Not a Rodin Project. Code Generation Abort!");
 		}else {
@@ -32,6 +38,25 @@ public class GenPython extends GenericAction implements IObjectActionDelegate{
 				
 				if(init != null) {
 					PythonPrinter py = new PythonPrinter(init);
+					
+					// process python libs
+					py.setImports(RodinUtil.imports(deps));
+					
+					// process external libs
+					ArrayList<String> exts = new ArrayList<String>();		
+					Map<String, String> externals = RodinUtil.externals(deps);
+					
+					for(String proj : externals.keySet()) {	
+						String config = externals.get(proj); 
+						String rcode = RodinUtil.rcode(proj, config);
+						exts.add(rcode);
+					}
+					
+					if(exts.size()!=0) {
+						py.setExternals(exts);
+					}
+					
+					// print code as whole
 					py.toCode(selectedProject.getLocation());
 					
 					String msg = String.format("Python Gen Finished. \n\n Code gen at %s/code/",
