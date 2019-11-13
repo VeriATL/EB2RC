@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/fr.loria.mosel.rodin.eb2rc.feature_1.0.0.qualifier.jar" id="fr.loria.mosel.rodin.eb2rc.feature" version="1.0.0.qualifier">
+      <category name="EB2RC"/>
+   </feature>
+   <category-def name="EB2RC" label="EB2RC">
+      <description>
+         Recursive code generation plugin for Event-B program in Rodin platform
+      </description>
+   </category-def>
+</site>
