@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IProject"
+            id="fr.loria.mosel.rodin.eb2rc.ui.menu.popup">
+         <menu
+               label="Run EB2RC"
+               path="additions"
+               id="fr.loria.mosel.rodin.eb2rc.ui.popup.menu">
+               <separator name="top"/> 
+         </menu>
+         <action
+               label="Generate Tikz Graph"
+               class="fr.loria.mosel.rodin.eb2rc.ui.popup.menu.GenTikzGraph"
+               menubarPath="fr.loria.mosel.rodin.eb2rc.ui.popup.menu/top"
+               enablesFor="1"
+               id="fr.loria.mosel.rodin.eb2rc.ui.popup.menu.callgraph">
+         </action>  
+         <action
+               label="Generate Tex Document"
+               class="fr.loria.mosel.rodin.eb2rc.ui.popup.menu.GenLatex"
+               menubarPath="fr.loria.mosel.rodin.eb2rc.ui.popup.menu/top"
+               enablesFor="1"
+               id="fr.loria.mosel.rodin.eb2rc.ui.popup.menu.latex">
+         </action>
+         <action
+               label="Generate Python Executable"
+               class="fr.loria.mosel.rodin.eb2rc.ui.popup.menu.GenPython"
+               menubarPath="fr.loria.mosel.rodin.eb2rc.ui.popup.menu/top"
+               enablesFor="1"
+               id="fr.loria.mosel.rodin.eb2rc.ui.popup.menu.py">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension point="org.eclipse.ui.preferencePages">
+		<page name="EB2RC"
+			  class="fr.loria.mosel.rodin.eb2rc.ui.preference.EB2RCPreferencePage"
+			  id="fr.loria.mosel.rodin.eb2rc.ui.preference.page"/>
+	</extension>
+</plugin>

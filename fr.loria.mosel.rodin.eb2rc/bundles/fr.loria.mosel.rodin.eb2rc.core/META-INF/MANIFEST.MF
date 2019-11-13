@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EB2RC Code Generator Core
+Bundle-SymbolicName: fr.inria.mosel.rodin.eb2rc.core;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: fr.loria.mosel.rodin.eb2rc.core.activators.PluginCoreActivator
+Bundle-Vendor: LORIA
+Require-Bundle: org.eclipse.core.runtime,
+ org.rodinp.core,
+ org.eventb.core,
+ org.eclipse.core.resources,
+ org.rodinp,
+ org.eventb.core.ast,
+ org.eclipse.emf.common,
+ org.eclipse.emf.ecore
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Automatic-Module-Name: fr.inria.mosel.eventb.codegenerator
+Bundle-ActivationPolicy: lazy
+Export-Package: fr.loria.mosel.rodin.eb2rc.core.datastructure,
+ fr.loria.mosel.rodin.eb2rc.core.printer,
+ fr.loria.mosel.rodin.eb2rc.core.util
