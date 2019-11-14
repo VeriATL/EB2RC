@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EB2RC Code Generator Core
 Bundle-SymbolicName: fr.inria.mosel.rodin.eb2rc.core;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: fr.loria.mosel.rodin.eb2rc.core.activators.PluginCoreActivator
 Bundle-Vendor: LORIA
 Require-Bundle: org.eclipse.core.runtime,
