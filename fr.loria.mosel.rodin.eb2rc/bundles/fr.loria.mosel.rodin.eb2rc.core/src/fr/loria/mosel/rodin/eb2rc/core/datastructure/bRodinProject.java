@@ -44,13 +44,6 @@ public class bRodinProject  {
 	}
 	
 	/* 
-	 * Retrieve default formula factory from Rodin
-	 */
-	public FormulaFactory factory () {
-		return FormulaFactory.getDefault();
-	}
-	
-	/* 
 	 * Retrieve preference, see TODO: here for more detail
 	 */
 	public bPreferencePage pref() {

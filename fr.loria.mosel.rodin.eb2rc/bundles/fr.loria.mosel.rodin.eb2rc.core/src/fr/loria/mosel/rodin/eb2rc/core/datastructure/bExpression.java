@@ -4,6 +4,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eventb.core.ast.Assignment;
 import org.eventb.core.ast.BecomesEqualTo;
 import org.eventb.core.ast.Formula;
+import org.eventb.core.ast.FormulaFactory;
 import org.eventb.core.ast.IParseResult;
 import org.eventb.core.ast.ITypeEnvironment;
 import org.eventb.core.ast.Predicate;
@@ -23,7 +24,8 @@ public class bExpression{
 	 * */
 	public Assignment parseAssignment () throws CoreException {
 		IParseResult result;
-		result = event.machine().rodin().factory().parseAssignment(content, null);
+		FormulaFactory ff = event.machine().iMachine().getFormulaFactory();
+		result = ff.parseAssignment(content, null);
 		Assignment pred = result.getParsedAssignment();
 		ITypeEnvironment env = event.machine().iMachine().getSCMachineRoot().getTypeEnvironment();
 		
@@ -78,7 +80,8 @@ public class bExpression{
 	 * */
 	public Predicate parsePredicate () throws CoreException {
 		IParseResult result;
-		result = event.machine().rodin().factory().parsePredicate(content, null);
+		FormulaFactory ff = event.machine().iMachine().getFormulaFactory();
+		result = ff.parsePredicate(content, null);
 		Predicate pred = result.getParsedPredicate();
 		ITypeEnvironment env = event.machine().iMachine().getSCMachineRoot().getTypeEnvironment();
 		
