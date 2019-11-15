@@ -28,8 +28,6 @@ public class GenPython extends GenericAction implements IObjectActionDelegate{
 	public void run(IAction action) {
 		bRodinProject rodin = new bRodinProject(selectedProject, cv(), sig(), start(), symbol());
 		
-		String deps = deps();
-		
 		if(rodin.project() == null) {
 			MessageDialog.openInformation(shell, "Info", "Not a Rodin Project. Code Generation Abort!");
 		}else {
@@ -38,23 +36,6 @@ public class GenPython extends GenericAction implements IObjectActionDelegate{
 				
 				if(init != null) {
 					PythonPrinter py = new PythonPrinter(init);
-					
-					// process python libs
-					py.setImports(RodinUtil.imports(deps));
-					
-					// process external libs
-					ArrayList<String> exts = new ArrayList<String>();		
-					Map<String, String> externals = RodinUtil.externals(deps);
-					
-					for(String proj : externals.keySet()) {	
-						String config = externals.get(proj); 
-						String rcode = RodinUtil.rcode(proj, config);
-						exts.add(rcode);
-					}
-					
-					if(exts.size()!=0) {
-						py.setExternals(exts);
-					}
 					
 					// print code as whole
 					py.toCode(selectedProject.getLocation());

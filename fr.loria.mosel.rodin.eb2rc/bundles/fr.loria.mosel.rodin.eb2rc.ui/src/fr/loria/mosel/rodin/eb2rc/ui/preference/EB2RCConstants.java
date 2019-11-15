@@ -6,5 +6,4 @@ public class EB2RCConstants {
 	public static final String START = "START";
 	public static final String SIG = "SIG";
 	public static final String SYMBOL = "SYMBOL";
-	public static final String DEP = "DEP";
 }
